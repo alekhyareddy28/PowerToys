@@ -86,7 +86,6 @@
             Name="BackGroundTextBox"
             HorizontalAlignment="Left" 
             Margin="256,301,0,0" 
-            Text="Hello" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             Height="41" 
@@ -99,6 +98,7 @@
 
         <TextBox 
             Style="{StaticResource CustomTextBox}"
+            TextChanging="textBox_TextChanging"
             Name="ForeGroundTextBox"
             Foreground="Transparent"
             HorizontalAlignment="Left" 

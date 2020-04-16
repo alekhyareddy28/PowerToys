@@ -33,36 +33,36 @@ namespace SearchBox.UI
         public bool m_ignoreNextTextChanged = false;
 
         // Sample list of strings to use in the autocomplete.
-        public string[] m_options = { "microsoft.com", "dev.windows.com", "msn.com", "office.com", "msdn.microsoft.com" };
+        public string[] m_options = { "Apple", "Banana", "Caramel", "Donut" };
 
         private void textBox_TextChanging(TextBox sender, TextBoxTextChangingEventArgs args)
         {
+            string s = ForeGroundTextBox.Text;
             // Needed for the backspace scenario.
-            if (m_ignoreNextTextChanged)
+            if (s.Length > 0)
             {
-                m_ignoreNextTextChanged = false;
-                return;
-            }
-            // All other scenarios other than the backspace scenario.
-            // Do the auto complete.
-            else
-            {
-                string s = BackGroundTextBox.Text;
-                if (s.Length > 0)
+                bool flag = false;
+                for (int i = 0; i < m_options.Length; i++)
                 {
-                    for (int i = 0; i < m_options.Length; i++)
+                    if (m_options[i].IndexOf(s) >= 0)
                     {
-                        if (m_options[i].IndexOf(s) >= 0)
-                        {
-                            if (s == m_options[i])
-                                break;
-
-                            BackGroundTextBox.Text = m_options[i];
-                            BackGroundTextBox.Select(s.Length, m_options[i].Length - s.Length);
+                        if (s == m_options[i])
                             break;
-                        }
+
+                        flag = true;
+                        BackGroundTextBox.Text = m_options[i];
+                        break;
                     }
                 }
+
+                if(!flag)
+                {
+                    BackGroundTextBox.Text = String.Empty;
+                }
+            }
+            else
+            {
+                BackGroundTextBox.Text = String.Empty;
             }
         }
 
