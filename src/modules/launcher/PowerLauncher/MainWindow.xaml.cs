@@ -260,7 +260,8 @@ namespace PowerLauncher
             var host = (WindowsXamlHost)sender;
             _launcher = (PowerLauncher.UI.LauncherControl)host.Child;
             _launcher.DataContext = _viewModel;
-            _launcher.SearchBox.TextChanged += QueryTextBox_TextChanged;
+            _launcher.TextBox.TextChanging += textBox_TextChanging;
+         /*   _launcher.SearchBox.TextChanged += QueryTextBox_TextChanged;
             _launcher.SearchBox.QuerySubmitted += AutoSuggestBox_QuerySubmitted;
             _launcher.SearchBox.Focus(Windows.UI.Xaml.FocusState.Programmatic);
             _viewModel.PropertyChanged += (o, e) =>
@@ -279,7 +280,44 @@ namespace PowerLauncher
                         }
                     }
                 }
-            };
+            };*/
+        }
+
+        // Sample list of strings to use in the autocomplete.
+        public string[] m_options = { "Apple", "Banana", "Caramel", "Donut" };
+
+        private string ToGetFromList(String input)
+        {
+            string s = input;
+            // Needed for the backspace scenario.
+            if (s.Length > 0)
+            {
+                bool flag = false;
+                for (int i = 0; i < m_options.Length; i++)
+                {
+                    if (m_options[i].IndexOf(s) >= 0)
+                    {
+                        if (s == m_options[i])
+                            break;
+
+                        flag = true;
+                        return m_options[i];
+                    }
+                }
+
+                if (!flag)
+                {
+                    return String.Empty;
+                }
+            }
+           
+            return String.Empty;
+        }
+
+        private void textBox_TextChanging(Windows.UI.Xaml.Controls.TextBox sender, TextBoxTextChangingEventArgs args)
+        {
+            _viewModel.QueryText = sender.Text;
+            _launcher.AutoCompleteTextBox.PlaceholderText = ToGetFromList(sender.Text);
         }
 
         private void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
