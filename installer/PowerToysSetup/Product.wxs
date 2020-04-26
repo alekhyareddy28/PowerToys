@@ -5,7 +5,7 @@
 
   <?define RepoDir="$(var.ProjectDir)..\..\" ?>
   <?define BinX64Dir="$(var.RepoDir)x64\$(var.Configuration)\" ?>
-  <Product Id="*"
+  <Product Id="488797A4-AD58-4CDB-8A14-19810D484598"
        Name="PowerToys (Preview)"
        Language="1033"
        Version="$(var.Version)"
@@ -17,10 +17,10 @@
     <MajorUpgrade DowngradeErrorMessage="A later version of [ProductName] is already installed." />
 
     <Upgrade Id="42B84BF7-5FBF-473B-9C8B-049DC16F7708">
-      <UpgradeVersion
+      <UpgradeVersion OnlyDetect="no"
          Minimum="0.11.0" Maximum="$(var.Version)"
-         Property="PREVIOUSVERSIONSINSTALLED"
-         IncludeMinimum="yes" IncludeMaximum="no" />
+         Property="PREVIOUSFOUND"
+         IncludeMinimum="yes" IncludeMaximum="yes" />
     </Upgrade>
 
     <MediaTemplate EmbedCab="yes" />
