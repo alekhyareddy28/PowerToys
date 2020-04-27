@@ -99,7 +99,7 @@ namespace Wox.Plugin.Shell
                 return results;
             }
         }
-
+        
         private List<Result> GetHistoryCmds(string cmd, Result result)
         {
             IEnumerable<Result> history = _settings.Count.Where(o => o.Key.Contains(cmd))

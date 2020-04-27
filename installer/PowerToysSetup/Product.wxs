@@ -5,7 +5,7 @@
 
   <?define RepoDir="$(var.ProjectDir)..\..\" ?>
   <?define BinX64Dir="$(var.RepoDir)x64\$(var.Configuration)\" ?>
-  <Product Id="488797A4-AD58-4CDB-8A14-19810D484598"
+  <Product Id="*"
        Name="PowerToys (Preview)"
        Language="1033"
        Version="$(var.Version)"
