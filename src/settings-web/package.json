@@ -20,7 +20,9 @@
     "test:update": "just-scripts jest -u",
     "test:start": "just-scripts start-test",
     "start": "just-scripts start",
-    "stack:upgrade": "just-scripts upgrade-stack"
+    "stack:upgrade": "just-scripts upgrade-stack",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "reactSnap": {
     "include": [
@@ -34,7 +36,8 @@
     "@uifabric/styling": "^7.10.1",
     "office-ui-fabric-react": "^7.83.1",
     "react": "~16.8.0",
-    "react-dom": "~16.8.0"
+    "react-dom": "~16.8.0",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "@types/jest": "^24.0.0",
@@ -50,5 +53,6 @@
   },
   "resolutions": {
     "mkdirp": "0.5.5"
-  }
+  },
+  "snyk": true
 }
