@@ -49,7 +49,7 @@ namespace Wox.Plugin
         /// </summary>
         public Func<ActionContext, bool> Action { get; set; }
 
-        public int Score { get; set; }
+        public List<int> Score { get; set; }
 
         /// <summary>
         /// A list of indexes for the characters to be highlighted in Title
@@ -132,5 +132,47 @@ namespace Wox.Plugin
         /// Plugin ID that generated this result
         /// </summary>
         public string PluginID { get; internal set; }
+
+        public static bool operator<(Result firstResult, Result secondResult)
+        {
+            List<int> firstScore = firstResult.Score;
+            List<int> secondScore = secondResult.Score;
+
+            int count1 = firstScore.Count;
+            int count2 = secondScore.Count;
+
+            int numberOfItems = Math.Min(count1, count2);
+
+            for(int index = 0; index < numberOfItems; index++)
+            {
+                if(firstScore[index] < secondScore[index])
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public static bool operator >(Result firstResult, Result secondResult)
+        {
+            List<int> firstScore = firstResult.Score;
+            List<int> secondScore = secondResult.Score;
+
+            int count1 = firstScore.Count;
+            int count2 = secondScore.Count;
+
+            int numberOfItems = Math.Min(count1, count2);
+
+            for (int index = 0; index < numberOfItems; index++)
+            {
+                if (firstScore[index] > secondScore[index])
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }
