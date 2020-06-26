@@ -133,7 +133,7 @@ namespace Wox.Plugin
         /// </summary>
         public string PluginID { get; internal set; }
 
-        public static bool operator<(Result firstResult, Result secondResult)
+        /*public static bool operator<(Result firstResult, Result secondResult)
         {
             List<int> firstScore = firstResult.Score;
             List<int> secondScore = secondResult.Score;
@@ -173,6 +173,6 @@ namespace Wox.Plugin
             }
 
             return false;
-        }
+        }*/
     }
 }

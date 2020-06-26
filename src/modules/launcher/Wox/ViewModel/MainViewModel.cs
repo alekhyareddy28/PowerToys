@@ -654,7 +654,7 @@ namespace Wox.ViewModel
             {
                 if (_topMostRecord.IsTopMost(result))
                 {
-                    result.Score = int.MaxValue;
+                    result.Score = new List<int> { int.MaxValue };
                 }
                 else
                 {

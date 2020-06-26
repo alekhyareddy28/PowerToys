@@ -213,7 +213,7 @@ namespace Microsoft.Plugin.Folder
             {
                 if (e is UnauthorizedAccessException || e is ArgumentException)
                 {
-                    results.Add(new Result { Title = e.Message, Score = 501 });
+                    results.Add(new Result { Title = e.Message, Score = new List<int> { 501 } });
 
                     return results;
                 }
@@ -269,7 +269,7 @@ namespace Microsoft.Plugin.Folder
                 QueryTextDisplay = search,
                 SubTitle = $"Folder: Use > to search within the directory. Use * to search for file extensions. Or use both >*.",
                 IcoPath = search,
-                Score = 500,
+                Score = new List<int> { 500 },
                 Action = c =>
                 {
                     Process.Start(_fileExplorerProgramName, sanitizedPath);
