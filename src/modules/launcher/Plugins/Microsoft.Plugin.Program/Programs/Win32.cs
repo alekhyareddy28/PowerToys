@@ -52,12 +52,13 @@ namespace Microsoft.Plugin.Program.Programs
             RUN_COMMAND = 3
         }
 
-        private int Score(string query)
+        private List<int> Score(string query)
         {
             var nameMatch = StringMatcher.FuzzySearch(query, Name);
             var descriptionMatch = StringMatcher.FuzzySearch(query, Description);
             var executableNameMatch = StringMatcher.FuzzySearch(query, ExecutableName);
-            var score = new[] { nameMatch.Score, descriptionMatch.Score, executableNameMatch.Score }.Max();
+            // var score = new[] { nameMatch.Score, descriptionMatch.Score, executableNameMatch.Score }.Max();
+            List<int> score = new List<int> { nameMatch.Score, descriptionMatch.Score, executableNameMatch.Score };
             return score;
         }
 

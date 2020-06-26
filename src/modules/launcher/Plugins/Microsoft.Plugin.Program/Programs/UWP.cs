@@ -261,11 +261,12 @@ namespace Microsoft.Plugin.Program.Programs
             public string LogoPath { get; set; }
             public UWP Package { get; set; }
 
-            private int Score(string query)
+            private List<int> Score(string query)
             {
                 var displayNameMatch = StringMatcher.FuzzySearch(query, DisplayName);
                 var descriptionMatch = StringMatcher.FuzzySearch(query, Description);
-                var score = new[] { displayNameMatch.Score, descriptionMatch.Score }.Max();
+                //var score = new[] { displayNameMatch.Score, descriptionMatch.Score }.Max();
+                List<int> score = new List<int> { displayNameMatch.Score, descriptionMatch.Score };
                 return score;
             }
 
