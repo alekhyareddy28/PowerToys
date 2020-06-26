@@ -89,7 +89,7 @@ namespace Wox.ViewModel
 
         #region Private Methods
 
-        private int InsertIndexOf(int newScore, IList<ResultViewModel> list)
+        private int InsertIndexOf(Result.Score newScore, IList<ResultViewModel> list)
         {
             int index = 0;
             for (; index < list.Count; index++)

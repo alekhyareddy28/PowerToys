@@ -70,6 +70,48 @@ namespace Wox.Plugin
             }
 
             private List<int> score;
+
+            public static bool operator <(Score firstResult, Score secondResult)
+            {
+                List<int> firstScore = firstResult.score;
+                List<int> secondScore = secondResult.score;
+
+                int count1 = firstScore.Count;
+                int count2 = secondScore.Count;
+
+                int numberOfItems = Math.Min(count1, count2);
+
+                for (int index = 0; index < numberOfItems; index++)
+                {
+                    if (firstScore[index] < secondScore[index])
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+
+            public static bool operator >(Score firstResult, Score secondResult)
+            {
+                List<int> firstScore = firstResult.score;
+                List<int> secondScore = secondResult.score;
+
+                int count1 = firstScore.Count;
+                int count2 = secondScore.Count;
+
+                int numberOfItems = Math.Min(count1, count2);
+
+                for (int index = 0; index < numberOfItems; index++)
+                {
+                    if (firstScore[index] > secondScore[index])
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
         }
 
         public Score score { get; set; }
