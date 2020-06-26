@@ -141,8 +141,9 @@ namespace Microsoft.Plugin.Program.Programs
 
         public Result Result(string query, IPublicAPI api)
         {
+            var zeroScore = new Result.Score(0);
             var score = Score(query);
-            if (score <= 0)
+            if (!(score > zeroScore))
             { // no need to create result if this is zero
                 return null;
             }

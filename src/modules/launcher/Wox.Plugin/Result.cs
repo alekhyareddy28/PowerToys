@@ -69,6 +69,12 @@ namespace Wox.Plugin
                 score = new List<int> { firstValue, secondValue, thirdValue };
             }
 
+            // To make it generic for any number of items so that it can be expanded in the future
+            public Score(List<int> scores)
+            {
+                score = new List<int>(scores);
+            }
+
             private List<int> score;
 
             public static bool operator <(Score firstResult, Score secondResult)
@@ -112,6 +118,26 @@ namespace Wox.Plugin
 
                 return false;
             }
+
+            public static Score operator +(Score firstResult, int increment)
+            {
+                if(firstResult == null)
+                {
+                    return null;
+                }
+
+                List<int> firstScore = firstResult.score;
+
+                int count = firstScore.Count;
+
+                for (int index = 0; index < count; index++)
+                {
+                    firstScore[index] += increment;
+                }
+
+                return new Result.Score(firstScore);
+            }
+
         }
 
         public Score score { get; set; }

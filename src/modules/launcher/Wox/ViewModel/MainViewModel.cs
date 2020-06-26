@@ -658,7 +658,7 @@ namespace Wox.ViewModel
                 }
                 else
                 {
-                    result.score += _userSelectedRecord.GetSelectedCount(result) * 5;
+                    // result.score += _userSelectedRecord.GetSelectedCount(result) * 5;
                 }
             }
 

@@ -97,7 +97,8 @@ namespace Microsoft.Plugin.Program
                 .Where(p => p.Enabled)
                 .Select(p => p.Result(query.Search, _context.API));
 
-            var result = results1.Concat(results2).Where(r => r != null && r.score > 0).ToList();
+            var nullResult = new Result.Score(0);
+            var result = results1.Concat(results2).Where(r => r != null && r.score > nullResult).ToList();
             return result;
         }
 
