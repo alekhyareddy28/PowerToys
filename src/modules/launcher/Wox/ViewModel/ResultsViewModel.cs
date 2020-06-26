@@ -95,7 +95,7 @@ namespace Wox.ViewModel
             for (; index < list.Count; index++)
             {
                 var result = list[index];
-                if (newScore > result.Result.Score)
+                if (newScore > result.Result.score)
                 {
                     break;
                 }
@@ -229,14 +229,14 @@ namespace Wox.ViewModel
             foreach (var sameResult in sameResults)
             {
                 int oldIndex = results.IndexOf(sameResult);
-                int oldScore = results[oldIndex].Result.Score;
+                var oldScore = results[oldIndex].Result.score;
                 var newResult = newResults[newResults.IndexOf(sameResult)];
-                int newScore = newResult.Result.Score;
+                var newScore = newResult.Result.score;
                 if (newScore != oldScore)
                 {
                     var oldResult = results[oldIndex];
 
-                    oldResult.Result.Score = newScore;
+                    oldResult.Result.score = newScore;
                     oldResult.Result.OriginQuery = newResult.Result.OriginQuery;
 
                     results.RemoveAt(oldIndex);
@@ -248,7 +248,7 @@ namespace Wox.ViewModel
             // insert result in relative complement of A in B
             foreach (var result in newResults.Except(sameResults))
             {
-                int newIndex = InsertIndexOf(result.Result.Score, results);
+                int newIndex = InsertIndexOf(result.Result.score, results);
                 results.Insert(newIndex, result);
             }
 
@@ -321,9 +321,9 @@ namespace Wox.ViewModel
                     { // result is not the same update it in the current index
                         this[i] = newResult;
                     }
-                    else if (oldResult.Result.Score != newResult.Result.Score)
+                    else if (oldResult.Result.score != newResult.Result.score)
                     {
-                        this[i].Result.Score = newResult.Result.Score;
+                        this[i].Result.score = newResult.Result.score;
                     }
                 }
 

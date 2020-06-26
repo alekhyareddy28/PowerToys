@@ -654,11 +654,11 @@ namespace Wox.ViewModel
             {
                 if (_topMostRecord.IsTopMost(result))
                 {
-                    result.Score = new List<int> { int.MaxValue };
+                    result.score = new Result.Score (int.MaxValue);
                 }
                 else
                 {
-                    result.Score += _userSelectedRecord.GetSelectedCount(result) * 5;
+                    result.score += _userSelectedRecord.GetSelectedCount(result) * 5;
                 }
             }
 

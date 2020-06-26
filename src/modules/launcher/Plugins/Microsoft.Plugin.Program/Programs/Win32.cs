@@ -52,13 +52,13 @@ namespace Microsoft.Plugin.Program.Programs
             RUN_COMMAND = 3
         }
 
-        private List<int> Score(string query)
+        private Result.Score Score(string query)
         {
             var nameMatch = StringMatcher.FuzzySearch(query, Name);
             var descriptionMatch = StringMatcher.FuzzySearch(query, Description);
             var executableNameMatch = StringMatcher.FuzzySearch(query, ExecutableName);
             // var score = new[] { nameMatch.Score, descriptionMatch.Score, executableNameMatch.Score }.Max();
-            List<int> score = new List<int> { nameMatch.Score, descriptionMatch.Score, executableNameMatch.Score };
+            Result.Score score = new Result.Score(nameMatch.Score, descriptionMatch.Score, executableNameMatch.Score);
             return score;
         }
 
@@ -171,7 +171,7 @@ namespace Microsoft.Plugin.Program.Programs
             {
                 SubTitle = SetSubtitle(AppType, api),
                 IcoPath = IcoPath,
-                Score = score,
+                score = score,
                 ContextData = this,
                 Action = e =>
                 {

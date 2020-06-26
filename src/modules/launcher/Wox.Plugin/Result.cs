@@ -49,7 +49,30 @@ namespace Wox.Plugin
         /// </summary>
         public Func<ActionContext, bool> Action { get; set; }
 
-        public List<int> Score { get; set; }
+        public class Score
+        {
+            // For the folder, calculator and shell plugins which have a deterministic score
+            public Score(int firstValue)
+            {
+                score = new List<int> { firstValue };
+            }
+
+            // For UWP applications
+            public Score(int firstValue, int secondValue)
+            {
+                score = new List<int> { firstValue, secondValue };
+            }
+
+            // For Win32 applications
+            public Score(int firstValue, int secondValue, int thirdValue)
+            {
+                score = new List<int> { firstValue, secondValue, thirdValue };
+            }
+
+            private List<int> score;
+        }
+
+        public Score score { get; set; }
 
         /// <summary>
         /// A list of indexes for the characters to be highlighted in Title
@@ -132,6 +155,8 @@ namespace Wox.Plugin
         /// Plugin ID that generated this result
         /// </summary>
         public string PluginID { get; internal set; }
+
+        
 
         /*public static bool operator<(Result firstResult, Result secondResult)
         {

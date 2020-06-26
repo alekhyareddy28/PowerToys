@@ -137,7 +137,7 @@ namespace Microsoft.Plugin.Shell
             Result result = new Result
             {
                 Title = cmd,
-                Score = new List<int> { 5000 },
+                score = new Result.Score(5000),
                 SubTitle = "Shell: " + _context.API.GetTranslation("wox_plugin_cmd_execute_through_shell"),
                 IcoPath = Image,
                 Action = c =>
