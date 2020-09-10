@@ -124,6 +124,24 @@ namespace Microsoft.Plugin.Indexer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Returns files and folders.
+        /// </summary>
+        public static string Microsoft_plugin_indexer_plugin_description {
+            get {
+                return ResourceManager.GetString("Microsoft_plugin_indexer_plugin_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Windows Indexer.
+        /// </summary>
+        public static string Microsoft_plugin_indexer_plugin_name {
+            get {
+                return ResourceManager.GetString("Microsoft_plugin_indexer_plugin_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Run as administrator (Ctrl+Shift+Enter).
         /// </summary>
         public static string Microsoft_plugin_indexer_run_as_administrator {

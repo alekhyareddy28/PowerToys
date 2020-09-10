@@ -206,18 +206,16 @@ namespace Microsoft.Plugin.Indexer
             UpdateIconPath(newTheme);
         }
 
-        // TODO: Localize the strings
         // Set the Plugin Title
         public string GetTranslatedPluginTitle()
         {
-            return "Windows Indexer Plugin";
+            return Properties.Resources.Microsoft_plugin_indexer_plugin_name;
         }
 
-        // TODO: Localize the string
         // Set the plugin Description
         public string GetTranslatedPluginDescription()
         {
-            return "Returns files and folders";
+            return Properties.Resources.Microsoft_plugin_indexer_plugin_description;
         }
 
         public List<ContextMenuResult> LoadContextMenus(Result selectedResult)
