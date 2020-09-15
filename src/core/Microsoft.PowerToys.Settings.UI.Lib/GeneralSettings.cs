@@ -12,6 +12,7 @@ namespace Microsoft.PowerToys.Settings.UI.Lib
     {
         private static readonly GeneralSettings GeneralSettingsData = new GeneralSettings();
 
+        [JsonIgnore]
         public static GeneralSettings Instance
         {
             get

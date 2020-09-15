@@ -114,7 +114,6 @@ namespace Microsoft.PowerToys.Settings.UI.Lib.ViewModels
                     OutGoingGeneralSettings snd = new OutGoingGeneralSettings(GeneralSettingsData);
 
                     SendConfigMSG(snd.ToString());
-                    var a = GeneralSettingsData.ToJsonString();
                     OnPropertyChanged("IsEnabled");
                     OnPropertyChanged("SnapHotkeysCategoryEnabled");
                 }
