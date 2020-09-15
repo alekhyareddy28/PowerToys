@@ -12,6 +12,7 @@ namespace Microsoft.PowerToys.Settings.UI.Lib
     {
         private static readonly GeneralSettings GeneralSettingsData = new GeneralSettings();
 
+        [JsonIgnore]
         public static GeneralSettings Instance
         {
             get
@@ -20,48 +21,34 @@ namespace Microsoft.PowerToys.Settings.UI.Lib
             }
         }
 
-        // This is to internally check if the general settings information has been read from the settings.json file
-        public bool IsInitialized { get; set; }
-
         // Gets or sets a value indicating whether packaged.
-        [JsonPropertyName("packaged")]
         public bool Packaged { get; set; }
 
         // Gets or sets a value indicating whether run powertoys on start-up.
-        [JsonPropertyName("startup")]
         public bool Startup { get; set; }
 
         // Gets or sets a value indicating whether the powertoy elevated.
-        [JsonPropertyName("is_elevated")]
         public bool IsElevated { get; set; }
 
         // Gets or sets a value indicating whether powertoys should run elevated.
-        [JsonPropertyName("run_elevated")]
         public bool RunElevated { get; set; }
 
         // Gets or sets a value indicating whether is admin.
-        [JsonPropertyName("is_admin")]
         public bool IsAdmin { get; set; }
 
         // Gets or sets theme Name.
-        [JsonPropertyName("theme")]
         public string Theme { get; set; }
 
         // Gets or sets system theme name.
-        [JsonPropertyName("system_theme")]
         public string SystemTheme { get; set; }
 
         // Gets or sets powertoys version number.
-        [JsonPropertyName("powertoys_version")]
         public string PowertoysVersion { get; set; }
 
-        [JsonPropertyName("action_name")]
         public string CustomActionName { get; set; }
 
-        [JsonPropertyName("enabled")]
         public EnabledModules Enabled { get; set; }
 
-        [JsonPropertyName("download_updates_automatically")]
         public bool AutoDownloadUpdates { get; set; }
 
         private GeneralSettings()
@@ -89,7 +76,7 @@ namespace Microsoft.PowerToys.Settings.UI.Lib
         // converts the current to a json string.
         public string ToJsonString()
         {
-            return JsonSerializer.Serialize(this);
+            return JsonSerializer.Serialize((IGeneralSettingsData)this);
         }
 
         private string DefaultPowertoysVersion()

@@ -34,13 +34,16 @@ namespace Microsoft.PowerToys.Settings.UI.Lib.ViewModels
 
         private string _settingsConfigFileFolder = string.Empty;
 
+        // This is to internally check if the general settings information has been read from the settings.json file
+        private bool IsInitialized { get; set; } = false;
+
         public GeneralViewModel(IGeneralSettingsData generalSettingsData, string runAsAdminText, string runAsUserText, bool isElevated, bool isAdmin, Func<string, int> updateTheme, Func<string, int> ipcMSGCallBackFunc, Func<string, int> ipcMSGRestartAsAdminMSGCallBackFunc, Func<string, int> ipcMSGCheckForUpdatesCallBackFunc, string configFileSubfolder = "")
         {
             CheckFoUpdatesEventHandler = new ButtonClickCommand(CheckForUpdates_Click);
             RestartElevatedButtonEventHandler = new ButtonClickCommand(Restart_Elevated);
             GeneralSettingsData = generalSettingsData;
 
-            if (GeneralSettingsData.IsInitialized)
+            if (!IsInitialized)
             {
                 try
                 {
@@ -63,7 +66,7 @@ namespace Microsoft.PowerToys.Settings.UI.Lib.ViewModels
                     SettingsUtils.SaveSettings(GeneralSettingsData.ToJsonString(), string.Empty);
                 }
 
-                generalSettingsData.IsInitialized = true;
+                IsInitialized = true;
             }
 
             // set the callback functions value to hangle outgoing IPC message.
