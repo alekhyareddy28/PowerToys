@@ -10,6 +10,7 @@ namespace Microsoft.PowerToys.Settings.UI.Lib
 {
     public class OutGoingGeneralSettings
     {
+
         [JsonPropertyName("general")]
         public IGeneralSettingsData GeneralSettings { get; set; }
 
