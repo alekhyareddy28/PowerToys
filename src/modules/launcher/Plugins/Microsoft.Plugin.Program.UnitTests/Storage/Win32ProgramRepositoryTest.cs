@@ -240,10 +240,30 @@ namespace Microsoft.Plugin.Program.UnitTests.Storage
             Assert.AreEqual(win32ProgramRepository.Count(), 0);
         }
 
-        [TestCase("path.exe")]
         [TestCase("path.lnk")]
+        public void Win32ProgramRepositoryMustNotCreateLnkAppWhenCreatedEventIsRaised(string path)
+        {
+            // We are handing internet shortcut apps using the Changed event instead
+
+            // Arrange
+            Win32ProgramRepository win32ProgramRepository = new Win32ProgramRepository(_fileSystemWatchers, new BinaryStorage<IList<Win32Program>>("Win32"), _settings, _pathsToWatch);
+            FileSystemEventArgs e = new FileSystemEventArgs(WatcherChangeTypes.Created, "directory", path);
+
+            // ShellLinkHelper must be mocked for lnk applications
+            var mockShellLink = new Mock<IShellLinkHelper>();
+            mockShellLink.Setup(m => m.RetrieveTargetPath(It.IsAny<string>())).Returns(string.Empty);
+            Win32Program.Helper = mockShellLink.Object;
+
+            // Act
+            _fileSystemMocks[0].Raise(m => m.Created += null, e);
+
+            // Assert
+            Assert.AreEqual(win32ProgramRepository.Count(), 0);
+        }
+
+        [TestCase("path.exe")]
         [TestCase("path.appref-ms")]
-        public void Win32ProgramRepositoryMustNotCreateAnyAppOtherThanUrlAppWhenChangedEventIsRaised(string path)
+        public void Win32ProgramRepositoryMustNotCreateAnyAppOtherThanUrlAndLnkAppWhenChangedEventIsRaised(string path)
         {
             // We are handing internet shortcut apps using the Changed event instead
 
@@ -320,11 +340,11 @@ namespace Microsoft.Plugin.Program.UnitTests.Storage
         }
 
         [TestCase("path.lnk")]
-        public void Win32ProgramRepositoryMustCallOnAppCreatedForLnkAppsWhenCreatedEventIsRaised(string path)
+        public void Win32ProgramRepositoryMustCallOnAppChangedForLnkAppsWhenChangedEventIsRaised(string path)
         {
             // Arrange
             Win32ProgramRepository win32ProgramRepository = new Win32ProgramRepository(_fileSystemWatchers, new BinaryStorage<IList<Win32Program>>("Win32"), _settings, _pathsToWatch);
-            FileSystemEventArgs e = new FileSystemEventArgs(WatcherChangeTypes.Created, "directory", path);
+            FileSystemEventArgs e = new FileSystemEventArgs(WatcherChangeTypes.Changed, "directory", path);
 
             // ShellLinkHelper must be mocked for lnk applications
             var mockShellLink = new Mock<IShellLinkHelper>();
@@ -332,7 +352,7 @@ namespace Microsoft.Plugin.Program.UnitTests.Storage
             Win32Program.Helper = mockShellLink.Object;
 
             // Act
-            _fileSystemMocks[0].Raise(m => m.Created += null, e);
+            _fileSystemMocks[0].Raise(m => m.Changed += null, e);
 
             // Assert
             Assert.AreEqual(win32ProgramRepository.Count(), 1);
