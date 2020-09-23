@@ -175,7 +175,7 @@ namespace Microsoft.Plugin.Program.Storage
         private void OnAppCreated(object sender, FileSystemEventArgs e)
         {
             string path = e.FullPath;
-            if (!Path.GetExtension(path).Equals(UrlExtension, StringComparison.CurrentCultureIgnoreCase))
+            if (!Path.GetExtension(path).Equals(UrlExtension, StringComparison.CurrentCultureIgnoreCase) && !Path.GetExtension(path).Equals(LnkExtension, StringComparison.CurrentCultureIgnoreCase))
             {
                 Programs.Win32Program app = Programs.Win32Program.GetAppFromPath(path);
                 if (app != null)
@@ -188,7 +188,7 @@ namespace Microsoft.Plugin.Program.Storage
         private void OnAppChanged(object sender, FileSystemEventArgs e)
         {
             string path = e.FullPath;
-            if (Path.GetExtension(path).Equals(UrlExtension, StringComparison.CurrentCultureIgnoreCase))
+            if (Path.GetExtension(path).Equals(UrlExtension, StringComparison.CurrentCultureIgnoreCase) || Path.GetExtension(path).Equals(LnkExtension, StringComparison.CurrentCultureIgnoreCase))
             {
                 Programs.Win32Program app = Programs.Win32Program.GetAppFromPath(path);
                 if (app != null)
