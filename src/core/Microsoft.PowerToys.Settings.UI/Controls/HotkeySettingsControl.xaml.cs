@@ -93,7 +93,7 @@ namespace Microsoft.PowerToys.Settings.UI.Controls
             HotkeyTextBox.GettingFocus += HotkeyTextBox_GettingFocus;
             HotkeyTextBox.LosingFocus += HotkeyTextBox_LosingFocus;
             HotkeyTextBox.Unloaded += HotkeyTextBox_Unloaded;
-            hook = new HotkeySettingsControlHook(Hotkey_KeyDown, Hotkey_KeyUp, Hotkey_IsActive);
+            hook = new HotkeySettingsControlHook(Hotkey_KeyDown, Hotkey_KeyUp, Hotkey_IsActive, FilterAccessibleKeyboardEvents);
         }
 
         private void HotkeyTextBox_Unloaded(object sender, RoutedEventArgs e)
@@ -146,6 +146,24 @@ namespace Microsoft.PowerToys.Settings.UI.Controls
                     HotkeyTextBox.Text = lastValidSettings.ToString();
                 }
             });
+        }
+
+        private AccessibleKeysPressed FilterAccessibleKeyboardEvents(int key)
+        {
+            if (key == 0x09)
+            {
+                if (!internalSettings.Shift && !internalSettings.Alt && !internalSettings.Win && !internalSettings.Ctrl)
+                {
+                    return AccessibleKeysPressed.Tab;
+                }
+
+            /*    else if (internalSettings.Shift && !internalSettings.Alt && !internalSettings.Win && !internalSettings.Ctrl)
+                {
+                    return AccessibleKeysPressed.ShiftTab;
+                }*/
+            }
+
+            return AccessibleKeysPressed.Other;
         }
 
         private async void Hotkey_KeyUp(int key)

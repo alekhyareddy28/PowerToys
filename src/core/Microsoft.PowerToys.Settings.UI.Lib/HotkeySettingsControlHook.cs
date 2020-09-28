@@ -10,6 +10,15 @@ namespace Microsoft.PowerToys.Settings.UI.Lib
 
     public delegate bool IsActive();
 
+    public enum AccessibleKeysPressed
+    {
+        Tab,
+        ShiftTab,
+        Other,
+    }
+
+    public delegate AccessibleKeysPressed FilterAccessibleKeyboardEvents(int key);
+
     public class HotkeySettingsControlHook
     {
         private const int WmKeyDown = 0x100;
@@ -21,19 +30,36 @@ namespace Microsoft.PowerToys.Settings.UI.Lib
         private KeyEvent _keyDown;
         private KeyEvent _keyUp;
         private IsActive _isActive;
+        private FilterAccessibleKeyboardEvents _filterKeyboardEvent;
 
-        public HotkeySettingsControlHook(KeyEvent keyDown, KeyEvent keyUp, IsActive isActive)
+        public HotkeySettingsControlHook(KeyEvent keyDown, KeyEvent keyUp, IsActive isActive, FilterAccessibleKeyboardEvents filterAccessibleKeyboardEvents)
         {
             _keyDown = keyDown;
             _keyUp = keyUp;
             _isActive = isActive;
-            _hook = new KeyboardHook(HotkeySettingsHookCallback, IsActive, null);
+            _filterKeyboardEvent = filterAccessibleKeyboardEvents;
+            _hook = new KeyboardHook(HotkeySettingsHookCallback, IsActive, FilterKeyboardEvents);
             _hook.Start();
         }
 
         private bool IsActive()
         {
             return _isActive();
+        }
+
+        private bool FilterKeyboardEvents(KeyboardEvent ev)
+        {
+            AccessibleKeysPressed keysPressed = _filterKeyboardEvent(ev.key);
+            if (keysPressed == AccessibleKeysPressed.Tab)
+            {
+                return false;
+            }
+            else if (keysPressed == AccessibleKeysPressed.ShiftTab)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         private void HotkeySettingsHookCallback(KeyboardEvent ev)
