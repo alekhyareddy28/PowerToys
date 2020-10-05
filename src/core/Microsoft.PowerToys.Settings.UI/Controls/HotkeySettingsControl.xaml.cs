@@ -379,27 +379,6 @@ namespace Microsoft.PowerToys.Settings.UI.Controls
 
             HotkeyTextBox.Text = hotkeySettings.ToString();
             _isActive = false;
-
-            /*if (!internalSettings.Shift && _shiftKeyDownOnEntering)
-            {
-                INPUT input = new INPUT
-                {
-                    type = INPUTTYPE.INPUT_KEYBOARD,
-                    data = new InputUnion
-                    {
-                        ki = new KEYBDINPUT
-                        {
-                            wVk = 0x10,
-                            dwFlags = (uint)KeyEventF.KeyUp,
-                            dwExtraInfo = (UIntPtr)0x5555,
-                        },
-                    },
-                };
-
-                INPUT[] inputs = new INPUT[] { input };
-
-                _ = SendInput(1, inputs, INPUT.Size);
-            }*/
         }
     }
 }
