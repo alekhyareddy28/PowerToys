@@ -269,24 +269,6 @@ namespace Microsoft.PowerToys.Settings.UI.Controls
                 // Shift was pressed on entering and remained pressed
                 else if (!internalSettings.Shift && _shiftKeyDownOnEntering && !_shiftToggled)
                 {
-                    INPUT inputShift = new INPUT
-                    {
-                        type = INPUTTYPE.INPUT_KEYBOARD,
-                        data = new InputUnion
-                        {
-                            ki = new KEYBDINPUT
-                            {
-                                wVk = 0x10,
-                                dwFlags = (uint)KeyEventF.KeyDown,
-                                dwExtraInfo = (UIntPtr)0x5555,
-                            },
-                        },
-                    };
-
-                    INPUT[] inputs = new INPUT[] { inputShift };
-
-                    _ = SendInput(1, inputs, INPUT.Size);
-
                     return AccessibleKeysPressed.Tab;
                 }
 
@@ -294,24 +276,6 @@ namespace Microsoft.PowerToys.Settings.UI.Controls
                 else if (internalSettings.Shift && _shiftKeyDownOnEntering && _shiftToggled)
                 {
                     internalSettings.Shift = false;
-
-                    INPUT inputShift = new INPUT
-                    {
-                        type = INPUTTYPE.INPUT_KEYBOARD,
-                        data = new InputUnion
-                        {
-                            ki = new KEYBDINPUT
-                            {
-                                wVk = 0x10,
-                                dwFlags = (uint)KeyEventF.KeyDown,
-                                dwExtraInfo = (UIntPtr)0x5555,
-                            },
-                        },
-                    };
-
-                    INPUT[] inputs = new INPUT[] { inputShift };
-
-                    _ = SendInput(1, inputs, INPUT.Size);
 
                     return AccessibleKeysPressed.Tab;
                 }
