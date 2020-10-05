@@ -13,6 +13,7 @@ namespace Microsoft.PowerToys.Settings.UI.Lib
     public enum AccessibleKeysPressed
     {
         Tab,
+        Shift,
         ShiftTab,
         Other,
     }
@@ -51,10 +52,6 @@ namespace Microsoft.PowerToys.Settings.UI.Lib
         {
             AccessibleKeysPressed keysPressed = _filterKeyboardEvent(ev.key);
             if (keysPressed == AccessibleKeysPressed.Tab)
-            {
-                return false;
-            }
-            else if (keysPressed == AccessibleKeysPressed.ShiftTab)
             {
                 return false;
             }
