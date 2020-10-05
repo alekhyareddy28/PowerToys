@@ -108,11 +108,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <MultiProcessorCompilation Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</MultiProcessorCompilation>
       <MultiProcessorCompilation Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</MultiProcessorCompilation>
-      <BrowseInformation Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</BrowseInformation>
     </ClCompile>
-    <Bscmake>
-      <PreserveSbr Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</PreserveSbr>
-    </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="action_runner_utils.cpp" />
@@ -147,10 +143,6 @@
     <ClInclude Include="trace.h" />
     <ClInclude Include="tray_icon.h" />
     <ClInclude Include="unhandled_exception_handler.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="runner.base.rc" />
-    <ResourceCompile Include="Generated Files/runner.rc" />
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="svgs\0.svg">
