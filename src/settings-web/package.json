@@ -29,10 +29,10 @@
     ]
   },
   "dependencies": {
-    "@svgr/webpack": "^4.3.3",
-    "@uifabric/azure-themes": "^7.0.10",
-    "@uifabric/styling": "^7.10.1",
-    "office-ui-fabric-react": "^7.83.1",
+    "@svgr/webpack": "^7.0.0",
+    "@uifabric/azure-themes": "^7.1.20",
+    "@uifabric/styling": "^7.12.15",
+    "office-ui-fabric-react": "^7.117.1",
     "react": "~16.8.0",
     "react-dom": "~16.8.0"
   },
